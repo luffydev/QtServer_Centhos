@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QtServer_Centhos", "QtServer_Centhos\QtServer_Centhos.vcxproj", "{B1A734AB-9516-4E7E-9604-75641CC43BD1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B1A734AB-9516-4E7E-9604-75641CC43BD1}.Debug|x64.ActiveCfg = Debug|x64
+		{B1A734AB-9516-4E7E-9604-75641CC43BD1}.Debug|x64.Build.0 = Debug|x64
+		{B1A734AB-9516-4E7E-9604-75641CC43BD1}.Release|x64.ActiveCfg = Release|x64
+		{B1A734AB-9516-4E7E-9604-75641CC43BD1}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1578B775-E4F5-4B5C-ACE0-A4AE15433E62}
+	EndGlobalSection
+EndGlobal
