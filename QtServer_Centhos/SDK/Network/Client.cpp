@@ -1,10 +1,11 @@
 #include "../Logger/Logger.h"
+#include "../Utils/Utils.h"
+
 #include "Client.h"
 #include "Packet.h"
 #include "Opcodes.h"
 #include "OpcodeHandler.h"
-#include <QRandomGenerator>
-#include <QString>
+
 
 TcpClient::TcpClient(qintptr pDescriptor)
 {
@@ -21,13 +22,19 @@ TcpClient::TcpClient(qintptr pDescriptor)
 	connect(mSocket, &QTcpSocket::disconnected, this, &TcpClient::onDisconnect);
 }
 
+void TcpClient::Send(QByteArray pPacket)
+{
+	mSocket->write(pPacket);
+}
+
 void TcpClient::onRecvData()
 {
 	*mLogger << " Recv data !!!!" << std::endl;
 
 	// if received data less 2 uint32 (opcode + size)
-	if (mSocket->bytesAvailable() < (sizeof(quint32) * 2))
+	if (mSocket->bytesAvailable() < ( (sizeof(quint32) * 2) + sizeof(quint64) ))
 		return;
+
 	
 	QDataStream lStream(mSocket);
 
@@ -43,6 +50,8 @@ void TcpClient::onRecvData()
 	if (!lStore->OpcodeExist(lPacket.GetOpcode()))
 	{
 		*mLogger << " RECV unhandled packet with opcode : " << lPacket.GetOpcode() << " and size : " << lPacket.GetSize() << std::endl;
+		mSocket->flush();
+		
 		return;
 	}
 
@@ -54,6 +63,13 @@ void TcpClient::onRecvData()
 
 	//we call our function
 	(lHandler->*lStruct.handler)(lPacket, this);
+
+	mSocket->readAll();
+}
+
+Logger* TcpClient::GetLogger()
+{
+	return mLogger;
 }
 
 void TcpClient::onDisconnect()
@@ -63,19 +79,7 @@ void TcpClient::onDisconnect()
 
 void TcpClient::generateUniqID()
 {
-	const uint lStringLen = 15;
-	const QString lPossibleCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-	const int lPossibleCharactersCount = lPossibleCharacters.length();
-
-	QString lRandomString;
-	lRandomString.reserve(lStringLen);
-
-	for (int lI = 0; lI < lStringLen; ++lI)
-	{
-		int lRandomIndex = QRandomGenerator::global()->bounded(lPossibleCharactersCount);
-		lRandomString.append(lPossibleCharacters.at(lRandomIndex));
-	}
-
+	QString lRandomString = Utils::instance().GenerateString();
 	mUniqID = lRandomString;
 }
 

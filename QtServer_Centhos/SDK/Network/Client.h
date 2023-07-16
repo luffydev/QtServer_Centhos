@@ -15,6 +15,10 @@ class TcpClient : public QObject
 		void generateUniqID();
 		QString getUniqID();
 
+		Logger* GetLogger();
+
+		void Send(QByteArray pPacket);
+
     private slots:
 	    void onRecvData();
 		void onDisconnect();

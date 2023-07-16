@@ -42,6 +42,9 @@
     <Filter Include="Source Files\SDK\Network\Packet">
       <UniqueIdentifier>{1f7ba1fb-69e6-4f85-9ee4-e01539db766f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\SDK\Utils">
+      <UniqueIdentifier>{e521f21f-398b-4506-85ab-06456baccb50}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -68,6 +71,9 @@
     <ClCompile Include="SDK\Network\Opcodes.cpp">
       <Filter>Source Files\SDK\Network\Packet</Filter>
     </ClCompile>
+    <ClCompile Include="SDK\Utils\Utils.cpp">
+      <Filter>Source Files\SDK\Utils</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SDK\Singleton\Singleton.h">
@@ -84,6 +90,9 @@
     </ClInclude>
     <ClInclude Include="SDK\Network\OpcodeHandler.h">
       <Filter>Source Files\SDK\Network\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\Utils\Utils.h">
+      <Filter>Source Files\SDK\Utils</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

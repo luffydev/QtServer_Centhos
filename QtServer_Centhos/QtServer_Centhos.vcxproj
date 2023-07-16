@@ -96,11 +96,13 @@
     <ClCompile Include="SDK\Network\Packet.cpp" />
     <ClCompile Include="SDK\Network\Server.cpp" />
     <ClCompile Include="SDK\Singleton\Singleton.cpp" />
+    <ClCompile Include="SDK\Utils\Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SDK\Network\OpcodeHandler.h" />
     <ClInclude Include="SDK\Network\Opcodes.h" />
     <ClInclude Include="SDK\Network\Packet.h" />
+    <ClInclude Include="SDK\Utils\Utils.h" />
     <QtMoc Include="SDK\Network\Client.h" />
     <ClInclude Include="SDK\Singleton\Singleton.h" />
   </ItemGroup>

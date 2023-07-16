@@ -37,5 +37,5 @@ void TCPServer::incomingConnection(qintptr pDescriptor)
 
 void TCPServer::clientDisconnected()
 {
-	*mLogger << " Client disconnected !";
+	*mLogger << " Client disconnected !" << std::endl;
 }

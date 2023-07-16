@@ -20,6 +20,7 @@ enum Opcodes
 
 enum SessionStatus
 {
+	STATUS_NULL,
 	STATUS_NOT_LOGGED,
 	STATUS_LOGGED
 };
