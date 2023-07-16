@@ -17,28 +17,42 @@ Logger& Logger::operator<<(uint pValue)
     return *this;
 }
 
+Logger& Logger::operator<<(QString pValue)
+{
+    mStr.append(pValue);
+    return *this;
+}
 
-// Surcharge spécifique pour std::endl
+
 Logger& Logger::operator<<(std::ostream& (*manipulator)(std::ostream&))
 {
-    // Votre traitement pour l'opérateur << std::endl
     if (manipulator == static_cast<std::ostream & (*)(std::ostream&)>(std::endl))
     {
 
         if (!mService.size())
             return *this;
 
+        QFile lFile = CreateDir();
+
+        if (!lFile.open(QIODevice::Append | QIODevice::Text))
+        {
+            std::cout << "[ERROR] -> Unable to open log file " << std::endl;
+            return *this;
+        }
+
         std::cout << "[" << mService << "]" << " -> " << mStr.toStdString();
 
-        mStr = "";
-        // Faites quelque chose spécifique pour std::endl
-        // Par exemple, enregistrez la fin de ligne dans un fichier de journal
+        QTextStream textStream_;
+        textStream_.setDevice(&lFile);
+        
+        textStream_ << GetFormatedDate() << "[" << mService.c_str() << "]" << " -> " << mStr << Qt::endl;
+        textStream_.flush();
 
-        // Utilisez votre propre fonction de journalisation ou traitement ici
-        // ...
+
+        mStr = "";
     }
 
-    mStream << manipulator; // Appel de l'opérateur << de std::ostream
+    mStream << manipulator; 
 
     return *this;
 }

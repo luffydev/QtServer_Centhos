@@ -1,5 +1,8 @@
 #include "../Logger/Logger.h"
 #include "Client.h"
+#include "Packet.h"
+#include "Opcodes.h"
+#include "OpcodeHandler.h"
 #include <QRandomGenerator>
 #include <QString>
 
@@ -21,20 +24,36 @@ TcpClient::TcpClient(qintptr pDescriptor)
 void TcpClient::onRecvData()
 {
 	*mLogger << " Recv data !!!!" << std::endl;
+
+	// if received data less 2 uint32 (opcode + size)
+	if (mSocket->bytesAvailable() < (sizeof(quint32) * 2))
+		return;
 	
-	QDataStream lPacket(mSocket);
-	lPacket.setByteOrder(QDataStream::LittleEndian);
+	QDataStream lStream(mSocket);
 
-	quint32 lOpcode, lSize = 0;
-
-	lPacket >> lOpcode;
-	lPacket >> lSize;
+	Packet lPacket(lStream);
+	
 
 	*mLogger << " TEST : " << mSocket->bytesAvailable() << std::endl;
 
-	*mLogger << " RECV OPCODE : " << lOpcode << " SIZE : " << lSize << std::endl;
+	*mLogger << " RECV OPCODE : " << lPacket.GetOpcode() << " SIZE : " << lPacket.GetSize() << std::endl;
 
+	OpcodeStore* lStore = &OpcodeStore::instance();
 
+	if (!lStore->OpcodeExist(lPacket.GetOpcode()))
+	{
+		*mLogger << " RECV unhandled packet with opcode : " << lPacket.GetOpcode() << " and size : " << lPacket.GetSize() << std::endl;
+		return;
+	}
+
+	OpcodeStruct lStruct = lStore->GetOpcodeData(lPacket.GetOpcode());
+
+	*mLogger << " RECV " << lStruct.name << " opcode handle it !" << std::endl;
+
+	OpcodeHandler* lHandler = new OpcodeHandler();
+
+	//we call our function
+	(lHandler->*lStruct.handler)(lPacket, this);
 }
 
 void TcpClient::onDisconnect()

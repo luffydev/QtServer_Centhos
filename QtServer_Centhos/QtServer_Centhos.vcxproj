@@ -91,10 +91,14 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="SDK\Logger\Logger.cpp" />
     <ClCompile Include="SDK\Network\Client.cpp" />
+    <ClCompile Include="SDK\Network\OpcodeHandler.cpp" />
+    <ClCompile Include="SDK\Network\Opcodes.cpp" />
+    <ClCompile Include="SDK\Network\Packet.cpp" />
     <ClCompile Include="SDK\Network\Server.cpp" />
     <ClCompile Include="SDK\Singleton\Singleton.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="SDK\Network\OpcodeHandler.h" />
     <ClInclude Include="SDK\Network\Opcodes.h" />
     <ClInclude Include="SDK\Network\Packet.h" />
     <QtMoc Include="SDK\Network\Client.h" />

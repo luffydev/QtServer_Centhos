@@ -59,6 +59,15 @@
     <ClCompile Include="SDK\Network\Server.cpp">
       <Filter>Source Files\SDK\Network\Server</Filter>
     </ClCompile>
+    <ClCompile Include="SDK\Network\Packet.cpp">
+      <Filter>Source Files\SDK\Network\Packet</Filter>
+    </ClCompile>
+    <ClCompile Include="SDK\Network\OpcodeHandler.cpp">
+      <Filter>Source Files\SDK\Network\Packet</Filter>
+    </ClCompile>
+    <ClCompile Include="SDK\Network\Opcodes.cpp">
+      <Filter>Source Files\SDK\Network\Packet</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SDK\Singleton\Singleton.h">
@@ -67,10 +76,13 @@
     <ClInclude Include="SDK\Logger\Logger.h">
       <Filter>Source Files\SDK\Logger</Filter>
     </ClInclude>
-    <ClInclude Include="SDK\Network\Opcodes.h">
-      <Filter>Source Files\SDK\Network</Filter>
-    </ClInclude>
     <ClInclude Include="SDK\Network\Packet.h">
+      <Filter>Source Files\SDK\Network\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\Network\Opcodes.h">
+      <Filter>Source Files\SDK\Network\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="SDK\Network\OpcodeHandler.h">
       <Filter>Source Files\SDK\Network\Packet</Filter>
     </ClInclude>
   </ItemGroup>
